@@ -1,11 +1,11 @@
 # PoissonMPI_ACC
-# Lukas Høghøj - May 2018. 02616 Large Scale Modelling - Technical University of Denmark
-Solving the 3-Dimensional Poisson equation using multiple GPUs. GPU acceleration is enabled by OpenACC and communication by MPI.
+## Lukas Høghøj - May 2018. 02616 Large Scale Modelling - Technical University of Denmark  
+Solving the 3-Dimensional Poisson equation using multiple GPUs. GPU acceleration is enabled by OpenACC and communication by MPI.  
 
 Target is ./jacobi
 
-Command  line arguments:
-    Mandatory input:
+Command  line arguments:  
+    Mandatory input:  
         1: Experiment type
             0:  Serial version
             1:  OpenACC version 1 - very simple
