@@ -1,0 +1,59 @@
+#!/bin/sh
+### General options 
+### -- specify queue -- 
+#BSUB -q gpuv100
+### -- set the job Name -- 
+#BSUB -J hyb2
+
+######## What to request:
+### -- ask for total number of cores, one per GPU? -- 
+#BSUB -n 2
+### -- specify that must be assigned 1 core per node - extend to more (to exploit all gpus/node) --
+#BSUB -R "span[ptile=2]"
+
+#BSUB -gpu "num=2:mode=exclusive_process"
+
+
+### -- set walltime limit: hh:mm -- 
+#BSUB -W 3:00 
+### -- specify that we need 2GB of memory per core/slot -- 
+#BSUB -R "rusage[mem=32GB]"
+### -- set the email address -- 
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+### -- send notification at start -- 
+# #BSUB -B 
+### -- send notification at completion -- 
+# #BSUB -N 
+### -- Specify the output and error file. %J is the job-id -- 
+### -- -o and -e mean append, -oo and -eo mean overwrite -- 
+#BSUB -o Output_%J.out 
+#BSUB -e Error_%J.err 
+
+#nx=(64 128 256 512 1024)
+#ny=(64 128 256 512 1024)
+#nz=(64 128 256 512 1024)
+#nx=(64 128 256 512 1024 2048)
+nx=(64 128 256 512 1024 1500 1700 1800 1900 2048)
+iter=10000
+outfile=timing44
+ver=(22 23)
+### Load gcc and pgi
+source /zdata/groups/common/nicpa/special-courses/s141388/source.sh
+
+make new
+
+
+for ((i=0; i<${#nx[@]}; i++));do
+    for ((j=0; j<${#ver[@]}; j++));do
+#    for ((j=0; j<${#ny[@]}; j++));do
+#        for ((k=0; k<${#nz[@]}; k++));do
+#            ARGS="${ver} ${nx[$i]} ${ny[$j]} ${nz[$k]} ${iter} -p ${outfile}"
+            ARGS="${ver[$j]} ${nx[$i]} ${nx[$i]} ${nx[$i]} ${iter} -p ${outfile}"
+            mpirun wrapper ${ARGS}
+#        done
+#    done
+    done
+done
+

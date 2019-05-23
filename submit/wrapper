@@ -1,0 +1,17 @@
+#!/bin/bash
+# Wrapper script to call the jacobi poisson solver on multiple GPUs/node
+
+
+# Gather all command line arguments to one variable, that is passed on to 
+# the programm call
+ARGS=""
+
+for ((i=1; i<=$#;i++));do
+ARGS+=" ${!i}"
+done
+
+# Export GPU to rank binding
+export CUDA_VISIBLE_DEVICES=${OMPI_COMM_WORLD_NODE_RANK}
+
+# Call program with command line arguments
+./jacobi ${ARGS}
