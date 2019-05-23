@@ -1,7 +1,20 @@
 # PoissonMPI_ACC
 ## Lukas Høghøj - May 2018. 02616 Large Scale Modelling - Technical University of Denmark  
 Solving the 3-Dimensional Poisson equation using multiple GPUs. GPU acceleration is enabled by OpenACC and communication by MPI.  
-  
+
+Compiled using the PGI compiler linked with OpenACC and OpenMPI.
+
+### Folders: ###
+- src:  
+	- 	Contains source code, header files and Makefile. Functions for solving the poisson equation are 
+		poisson3D_*.c  and main script is jacobi.c.
+- submit:
+	-	Contains batch scripts to submit jobs to the DTU GBar and a wrapper script, to ensure correct binding
+		between MPI rank and GPUs when running with more than one GPU/node.
+- util:
+	-	Contains postprocessing python script and timing data from benchmark runs.
+
+
 Target is ./jacobi  
 
 
