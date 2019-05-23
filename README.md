@@ -5,7 +5,7 @@ Solving the 3-Dimensional Poisson equation using multiple GPUs. GPU acceleration
 Target is ./jacobi  
   
 ### Command  line arguments:  ###
-Markup:*Mandatory input:  
+Markup : *Mandatory input:  
         1. Experiment type  
             *0:  Serial version  
             *1:  OpenACC version 1 - very simple  
